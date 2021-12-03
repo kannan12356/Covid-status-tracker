@@ -1,15 +1,14 @@
-import React, {Component} from 'react';
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Header from './Components/Header';
 import India from './Components/India';
 import World from './Components/World';
 
+function App(){
 
-class App extends Component{
-
-  render(){
-    return(      
+  return(
+    <div className="App">
       <Router>
         <div>
           <Header/>
@@ -22,7 +21,8 @@ class App extends Component{
           </div>
         </div>
       </Router>
-    )
-  }
+    </div>
+  )
 }
+
 export default App;

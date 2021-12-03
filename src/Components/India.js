@@ -1,24 +1,17 @@
-import React, {Component} from 'react';
+import React, { useState, useEffect } from 'react';
 import {Card} from 'react-bootstrap';
 import State from './State';
 import axios from 'axios';
 
-class India extends Component{
+function India(){
+    const [data, setData] = useState([]);
 
-    constructor(){
-        super();
-        this.state = {
-            data : []
-        }
-    }
-
-    componentDidMount(){
+    useEffect(() => {
         axios.get("https://corona.lmao.ninja/v2/countries/india").then(response=>{
-            this.setState({data:response.data});
+            setData(response.data);
         })
-    }
+    }, []);
 
-  render(){
     return(
         <div className="row" style={{marginTop: "10px"}}>
             <div className="col-md-12">
@@ -31,9 +24,9 @@ class India extends Component{
                         <Card bg='primary' text='white' style={{ width: '18rem' }}>
                             <Card.Body className="text-center">
                                 <Card.Title>Total Cases</Card.Title>
-                                <h3>{this.state.data.cases}</h3>
+                                <h3>{data.cases}</h3>
                                 <Card.Text>
-                                    [Today : {this.state.data.todayCases}]
+                                    [Today : {data.todayCases}]
                                 </Card.Text>                      
                             </Card.Body>
                         </Card>
@@ -42,7 +35,7 @@ class India extends Component{
                         <Card bg='warning' text='white' style={{ width: '18rem' }}>
                             <Card.Body className="text-center">
                                 <Card.Title>Active Cases</Card.Title>
-                                <h3>{this.state.data.active}</h3>
+                                <h3>{data.active}</h3>
                                 <Card.Text>
                                     [Today : 0]
                                 </Card.Text>                      
@@ -53,9 +46,9 @@ class India extends Component{
                         <Card bg='success' text='white' style={{ width: '18rem' }}>
                             <Card.Body className="text-center">
                                 <Card.Title>Recovered</Card.Title>
-                                <h3>{this.state.data.recovered}</h3>
+                                <h3>{data.recovered}</h3>
                                 <Card.Text>
-                                    [Today : {this.state.data.todayRecovered}]
+                                    [Today : {data.todayRecovered}]
                                 </Card.Text>                      
                             </Card.Body>
                         </Card>
@@ -64,9 +57,9 @@ class India extends Component{
                         <Card bg='danger' text='white' style={{ width: '18rem' }}>
                             <Card.Body className="text-center">
                                 <Card.Title>Total Deaths</Card.Title>
-                                <h3>{this.state.data.deaths}</h3>
+                                <h3>{data.deaths}</h3>
                                 <Card.Text>
-                                    [Today : {this.state.data.todayDeaths}]
+                                    [Today : {data.todayDeaths}]
                                 </Card.Text>                      
                             </Card.Body>
                         </Card>
@@ -80,6 +73,6 @@ class India extends Component{
             </div>
         </div>
     )
-  }
 }
+
 export default India;

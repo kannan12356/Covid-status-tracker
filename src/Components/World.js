@@ -1,24 +1,16 @@
-import React, {Component} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 
+function World(){
+    const [data, setData] = useState([])
 
-class World extends Component{
-
-    constructor(){
-        super()
-        this.state = {
-            data: []
-        }
-    }
-
-    componentDidMount(){
+    useEffect(() => {
         axios.get("https://corona.lmao.ninja/v2/countries").then(response=>{
-            this.setState({data:response.data});
-        })
-    }
+            setData(response.data);
+        })        
+    }, [])
 
-  render(){
     return(
         <div className="row">
             <div className="col-md-12">
@@ -33,9 +25,9 @@ class World extends Component{
                     </thead>
                     <tbody>
                         {
-                            this.state.data.map((countryData,k)=>{
+                            data.map((countryData,k)=>{
                                 return(
-                                    <tr>
+                                    <tr key={k}>
                                         <td>
                                             <img style={{width:"30px", marginRight: "10px"}} src={countryData.countryInfo.flag} alt="flag"/>
                                             {countryData.country}                                            
@@ -52,6 +44,6 @@ class World extends Component{
             </div>
         </div>
     )
-  }
 }
+
 export default World;
